@@ -31,7 +31,7 @@ export class UsersController {
   }
 
   @Get('/:id')
-  getUsertById(@Param('id', ParseIntPipe) id: number): Promise<User> {
+  getUserById(@Param('id', ParseIntPipe) id: number): Promise<User> {
     return this.usersService.getUserById(id);
   }
 
@@ -47,20 +47,10 @@ export class UsersController {
   }
 
   @Patch('/:id/update')
-  updateUser(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() updateUserDto: UpdateUserDto,
-  ): Promise<User> {
-    const { role, userName, firstName, lastName, email, gender } =
-      updateUserDto;
-    return this.usersService.updateUser(
-      id,
-      role,
-      userName,
-      firstName,
-      lastName,
-      email,
-      gender,
-    );
+  async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<User> {
+    const user = await this.getUserById(id);
+    Object.assign(user, updateUserDto);
+    await user.save();
+    return user;
   }
 }

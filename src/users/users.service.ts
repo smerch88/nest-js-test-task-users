@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { UserRole } from './user-role.enum';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -66,22 +67,28 @@ export class UsersService {
     }
   }
 
-  async updateUser(
-    id: number,
-    role: UserRole,
-    userName: string,
-    firstName: string,
-    lastName: string,
-    email: string,
-    gender: string,
-  ): Promise<User> {
+  async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<User> {
     const user = await this.getUserById(id);
-    user.role = role;
-    user.userName = userName;
-    user.firstName = firstName;
-    user.lastName = lastName;
-    user.email = email;
-    user.gender = gender;
+    const { role, userName, firstName, lastName, email, gender } =
+      updateUserDto;
+    if (role) {
+      user.role = role;
+    }
+    if (userName) {
+      user.userName = userName;
+    }
+    if (firstName) {
+      user.firstName = firstName;
+    }
+    if (lastName) {
+      user.lastName = lastName;
+    }
+    if (email) {
+      user.email = email;
+    }
+    if (gender) {
+      user.gender = gender;
+    }
     await user.save();
     return user;
   }
