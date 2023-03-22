@@ -1,5 +1,5 @@
-import { UserRole } from '../users.model';
 import { IsOptional, IsIn, IsNotEmpty } from 'class-validator';
+import { UserRole } from '../user-role.enum';
 
 export class GetUsersFilterDto {
   @IsOptional()
