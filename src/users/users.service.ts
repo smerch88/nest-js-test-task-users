@@ -11,6 +11,10 @@ export class UsersService {
     return this.users;
   }
 
+  getUserById(id: string): User {
+    return this.users.find((u) => u.id === id);
+  }
+
   createUser(createUserDto: CreateUserDto): User {
     const { userName, firstName, lastName, email, gender } = createUserDto;
 
@@ -26,5 +30,9 @@ export class UsersService {
 
     this.users.push(user);
     return user;
+  }
+
+  deleteUser(id: string): void {
+    this.users = this.users.filter((u) => u.id !== id);
   }
 }
