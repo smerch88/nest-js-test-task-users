@@ -17,6 +17,7 @@ import { GetUsersFilterDto } from './dto/get-users-filter.dto';
 import { UserStatusValidationPipe } from './pipes/user-status.validation.pipe';
 import { User } from './user.entity';
 import { UserRole } from './user-role.enum';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -45,11 +46,21 @@ export class UsersController {
     return this.usersService.deleteUser(id);
   }
 
-  @Patch('/:id/role')
-  updateUserRole(
+  @Patch('/:id/update')
+  updateUser(
     @Param('id', ParseIntPipe) id: number,
-    @Body('role', UserStatusValidationPipe) role: UserRole,
+    @Body() updateUserDto: UpdateUserDto,
   ): Promise<User> {
-    return this.usersService.updateUserRole(id, role);
+    const { role, userName, firstName, lastName, email, gender } =
+      updateUserDto;
+    return this.usersService.updateUser(
+      id,
+      role,
+      userName,
+      firstName,
+      lastName,
+      email,
+      gender,
+    );
   }
 }

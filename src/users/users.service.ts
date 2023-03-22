@@ -66,9 +66,22 @@ export class UsersService {
     }
   }
 
-  async updateUserRole(id: number, role: UserRole): Promise<User> {
+  async updateUser(
+    id: number,
+    role: UserRole,
+    userName: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    gender: string,
+  ): Promise<User> {
     const user = await this.getUserById(id);
     user.role = role;
+    user.userName = userName;
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.email = email;
+    user.gender = gender;
     await user.save();
     return user;
   }
