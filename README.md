@@ -71,3 +71,11 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+# Additional
+
+Postman:
+https://www.postman.com/speeding-station-332375/workspace/test-task-nest-js/overview
+
+Task:
+https://docs.google.com/presentation/d/1rSVkE3Znb6Dw0Dg2qXWm8ZXGMDzn_5Z6QdfzW3ly8-Y/edit#slide=id.g210c8798c96_0_49
